@@ -1,0 +1,30 @@
+[
+  {
+    "codigo": "PIZZA001",
+    "nombre": "Pizza Margarita",
+    "categoria": "Pizzas",
+    "precio": 19.0,
+    "stock": 10
+  },
+  {
+    "codigo": "HAMB001",
+    "nombre": "Hamburguesa Clásica",
+    "categoria": "Hamburguesas",
+    "precio": 15000.0,
+    "stock": 8
+  },
+  {
+    "codigo": "BEBI001",
+    "nombre": "Gaseosa 600ml",
+    "categoria": "Bebidas",
+    "precio": 4500.0,
+    "stock": 20
+  },
+  {
+    "codigo": "AGUA11",
+    "nombre": "AGUA NATURAL",
+    "categoria": "Bebidas",
+    "precio": 1.0,
+    "stock": 30
+  }
+]
