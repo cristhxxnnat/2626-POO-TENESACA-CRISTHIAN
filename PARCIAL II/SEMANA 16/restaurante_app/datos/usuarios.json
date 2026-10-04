@@ -1,0 +1,16 @@
+[
+  {
+    "identificacion": "admin",
+    "nombre": "Administrador",
+    "correo": "admin@restaurante.com",
+    "password": "1234",
+    "rol": "Administrador"
+  },
+  {
+    "identificacion": "empleado1",
+    "nombre": "Ana García",
+    "correo": "ana@restaurante.com",
+    "password": "5678",
+    "rol": "Empleado"
+  }
+]

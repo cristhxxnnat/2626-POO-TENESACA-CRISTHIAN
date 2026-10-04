@@ -1,0 +1,107 @@
+from __future__ import annotations
+
+from typing import Any
+
+
+class Usuario:
+    """Representa un usuario del restaurante."""
+
+    ROLES = ("Administrador", "Empleado", "Cliente")
+
+    def __init__(
+        self,
+        identificacion: str,
+        nombre: str,
+        correo: str,
+        password: str = "1234",
+        rol: str | None = None,
+    ) -> None:
+        self.identificacion: str = identificacion
+        self.nombre: str = nombre
+        self.correo: str = correo
+        self.password: str = password
+        rol_predeterminado = "Administrador" if identificacion.strip().casefold() == "admin" else "Cliente"
+        self.rol: str = rol or rol_predeterminado
+
+    @property
+    def identificacion(self) -> str:
+        return self._identificacion
+
+    @identificacion.setter
+    def identificacion(self, valor: str) -> None:
+        if not isinstance(valor, str) or not valor.strip():
+            raise ValueError("La identificación del usuario no puede estar vacía.")
+        self._identificacion = valor.strip()
+
+    @property
+    def nombre(self) -> str:
+        return self._nombre
+
+    @nombre.setter
+    def nombre(self, valor: str) -> None:
+        if not isinstance(valor, str) or not valor.strip():
+            raise ValueError("El nombre del usuario no puede estar vacío.")
+        self._nombre = valor.strip()
+
+    @property
+    def correo(self) -> str:
+        return self._correo
+
+    @correo.setter
+    def correo(self, valor: str) -> None:
+        if not isinstance(valor, str) or not valor.strip():
+            raise ValueError("El correo del usuario no puede estar vacío.")
+        self._correo = valor.strip()
+
+    @property
+    def password(self) -> str:
+        return self._password
+
+    @password.setter
+    def password(self, valor: str) -> None:
+        if not isinstance(valor, str) or not valor.strip():
+            raise ValueError("La contraseña del usuario no puede estar vacía.")
+        self._password = valor.strip()
+
+    @property
+    def rol(self) -> str:
+        return self._rol
+
+    @rol.setter
+    def rol(self, valor: str) -> None:
+        rol_normalizado = valor.strip().casefold() if isinstance(valor, str) else ""
+        roles_validos = {rol.casefold(): rol for rol in self.ROLES}
+        if rol_normalizado not in roles_validos:
+            raise ValueError("El rol debe ser Administrador, Empleado o Cliente.")
+        self._rol = roles_validos[rol_normalizado]
+
+    def a_dict(self) -> dict[str, object]:
+        return {
+            "identificacion": self.identificacion,
+            "nombre": self.nombre,
+            "correo": self.correo,
+            "password": self.password,
+            "rol": self.rol,
+        }
+
+    @classmethod
+    def desde_dict(cls, datos: dict[str, Any]) -> "Usuario":
+        try:
+            return cls(
+                identificacion=datos["identificacion"],
+                nombre=datos["nombre"],
+                correo=datos["correo"],
+                password=datos.get("password", "1234"),
+                rol=datos.get("rol"),
+            )
+        except KeyError as error:
+            raise KeyError(f"Falta la clave requerida en el registro: {error}") from error
+
+    def __str__(self) -> str:
+        return (
+            f"Usuario(identificacion={self.identificacion}, nombre={self.nombre}, "
+            f"correo={self.correo})"
+        )
+
+    def __repr__(self) -> str:
+        return self.__str__()
